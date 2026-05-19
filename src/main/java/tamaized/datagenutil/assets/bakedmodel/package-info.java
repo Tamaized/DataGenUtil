@@ -1,0 +1,9 @@
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@TypeUseAreNonnullByDefault
+package tamaized.datagenutil.assets.bakedmodel;
+
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import tamaized.pkginfoutil.TypeUseAreNonnullByDefault;
+
+import javax.annotation.ParametersAreNonnullByDefault;
