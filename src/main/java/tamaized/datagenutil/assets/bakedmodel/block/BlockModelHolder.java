@@ -17,10 +17,7 @@ public abstract class BlockModelHolder extends ModelHolder<BlockModelGenerators>
 	@Nullable
 	private Identifier itemBlockModel;
 
-	protected String name() {
-		return name(null);
-	}
-
+	@Override
 	protected String name(@Nullable String suffix) {
 		return "block/" + nameToUse() + (suffix == null ? "" : ("_" + suffix));
 	}
@@ -40,6 +37,7 @@ public abstract class BlockModelHolder extends ModelHolder<BlockModelGenerators>
 		return null;
 	}
 
+	@Override
 	protected String nameToUse() {
 		return Objects.requireNonNull(blockForName()).getId().getPath();
 	}

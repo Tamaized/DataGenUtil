@@ -13,6 +13,14 @@ public abstract class ModelHolder<T> {
 	@Nullable
 	private ExtendedTextureMapping textureMapping;
 
+	protected String name() {
+		return name(null);
+	}
+
+	protected abstract String name(@Nullable String suffix);
+
+	protected abstract String nameToUse();
+
 	public final Optional<Identifier> get() {
 		return Optional.ofNullable(model);
 	}
