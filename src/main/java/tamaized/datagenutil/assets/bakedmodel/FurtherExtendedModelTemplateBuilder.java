@@ -1,6 +1,7 @@
 package tamaized.datagenutil.assets.bakedmodel;
 
 import net.neoforged.neoforge.client.model.generators.template.ExtendedModelTemplateBuilder;
+import tamaized.pkginfoutil.PublicApi;
 
 import java.util.function.Function;
 
@@ -12,6 +13,7 @@ public class FurtherExtendedModelTemplateBuilder extends ExtendedModelTemplateBu
 		this.extendedTextures = extendedTextures;
 	}
 
+	@PublicApi
 	public FurtherExtendedModelTemplate buildExtended() {
 		return buildExtended(model -> model);
 	}

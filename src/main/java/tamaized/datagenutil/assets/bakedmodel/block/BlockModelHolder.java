@@ -1,10 +1,12 @@
-package tamaized.datagenutil.assets.bakedmodel;
+package tamaized.datagenutil.assets.bakedmodel.block;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import tamaized.datagenutil.assets.bakedmodel.ModelHolder;
+import tamaized.pkginfoutil.PublicApi;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -19,15 +21,17 @@ public abstract class BlockModelHolder extends ModelHolder<BlockModelGenerators>
 		return name(null);
 	}
 
-	protected String name(@org.jetbrains.annotations.Nullable String suffix) {
+	protected String name(@Nullable String suffix) {
 		return "block/" + nameToUse() + (suffix == null ? "" : ("_" + suffix));
 	}
 
+	@PublicApi
 	protected String nameForItemBlock() {
 		return nameForItemBlock(null);
 	}
 
-	protected String nameForItemBlock(@org.jetbrains.annotations.Nullable String suffix) {
+	@PublicApi
+	protected String nameForItemBlock(@Nullable String suffix) {
 		return "item/" + nameToUse() + (suffix == null ? "" : ("_" + suffix));
 	}
 
@@ -44,6 +48,7 @@ public abstract class BlockModelHolder extends ModelHolder<BlockModelGenerators>
 		return false;
 	}
 
+	@PublicApi
 	public Identifier getOrBuildItemBlockModel(BlockModelGenerators provider) {
 		return getItemBlockModel().orElseGet(() -> {
 			buildAndSetItemBlockModel(provider);
