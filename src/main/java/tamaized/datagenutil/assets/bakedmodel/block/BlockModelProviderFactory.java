@@ -1,7 +1,8 @@
 package tamaized.datagenutil.assets.bakedmodel.block;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
-import net.neoforged.neoforge.common.data.LanguageProvider;
+import tamaized.datagenutil.assets.lang.ExtendedLangProvider;
+import tamaized.datagenutil.assets.lang.LangProvider;
 import tamaized.pkginfoutil.PublicApi;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Objects;
 
 @PublicApi
 @SuppressWarnings("ClassCanBeRecord")
-public final class BlockModelProviderFactory {
+public final class BlockModelProviderFactory implements LangProvider {
 
 	private final List<BlockModelHolder> blockModelHolders;
 
@@ -30,8 +31,8 @@ public final class BlockModelProviderFactory {
 		});
 	}
 
-	@PublicApi
-	public void addLangEntries(LanguageProvider provider) {
+	@Override
+	public void addLangEntries(ExtendedLangProvider provider) {
 		blockModelHolders.forEach(holder -> holder.lang().ifPresent(lang -> provider.addBlock(Objects.requireNonNull(holder.blockForName()), lang)));
 	}
 
