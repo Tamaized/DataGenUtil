@@ -1,0 +1,34 @@
+package tamaized.datagenutil.data.recipe;
+
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import tamaized.pkginfoutil.PublicApi;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+@PublicApi
+public class RecipeProviderUtil {
+
+	@PublicApi
+	public static Criterion<InventoryChangeTrigger.TriggerInstance> has(HolderGetter<Item> registry, ItemLike itemLike) {
+		return inventoryTrigger(ItemPredicate.Builder.item().of(registry, itemLike));
+	}
+
+	@PublicApi
+	public static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate.Builder... items) {
+		return inventoryTrigger(Arrays.stream(items).map(ItemPredicate.Builder::build).toArray(ItemPredicate[]::new));
+	}
+
+	@PublicApi
+	public static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... predicates) {
+		return CriteriaTriggers.INVENTORY_CHANGED.createCriterion(new InventoryChangeTrigger.TriggerInstance(Optional.empty(), InventoryChangeTrigger.TriggerInstance.Slots.ANY, List.of(predicates)));
+	}
+
+}
