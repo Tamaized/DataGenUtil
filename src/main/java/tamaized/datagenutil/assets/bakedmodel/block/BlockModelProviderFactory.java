@@ -1,6 +1,8 @@
 package tamaized.datagenutil.assets.bakedmodel.block;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
+import tamaized.beanification.Component;
+import tamaized.beanification.Directory;
 import tamaized.datagenutil.assets.lang.ExtendedLangProvider;
 import tamaized.datagenutil.assets.lang.LangProvider;
 import tamaized.pkginfoutil.PublicApi;
@@ -8,15 +10,11 @@ import tamaized.pkginfoutil.PublicApi;
 import java.util.List;
 import java.util.Objects;
 
-@PublicApi
-@SuppressWarnings("ClassCanBeRecord")
+@Component
 public final class BlockModelProviderFactory implements LangProvider {
 
-	private final List<BlockModelHolder> blockModelHolders;
-
-	public BlockModelProviderFactory(List<BlockModelHolder> blockModelHolders) {
-		this.blockModelHolders = blockModelHolders;
-	}
+	@Directory(BlockModelHolder.class)
+	private List<BlockModelHolder> blockModelHolders;
 
 	@PublicApi
 	public void make(BlockModelGenerators provider) {

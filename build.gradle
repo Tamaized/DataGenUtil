@@ -121,6 +121,11 @@ repositories {
 dependencies {
 //    runtimeOnly "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
 
+	def beanification = "tamaized:beanification:${project.beanification_version}"
+	implementation beanification
+	testImplementation "${beanification}:tests"
+	testCompileOnly "${beanification}:test-sources"
+
 	implementation "tamaized:pkginfoutil:${project.pkginfoutil_version}"
 
     testImplementation group: 'net.neoforged', name: 'testframework', version: project.neo_version
@@ -177,8 +182,33 @@ publishing {
                 artifact this.project.jar
                 artifact this.project.sourceJar
             }
+
             groupId 'tamaized'
             artifactId this.project.mod_id
+
+			def depsProvider = this.project.provider {
+				[
+					beanification_version: this.project.beanification_version,
+					pkginfoutil_version: this.project.pkginfoutil_version
+				]
+			}
+
+			pom.withXml {
+				def dependenciesNode = asNode().appendNode('dependencies')
+
+				def addDep = { String group, String name, String version ->
+					def depNode = dependenciesNode.appendNode('dependency')
+					depNode.appendNode('groupId', group)
+					depNode.appendNode('artifactId', name)
+					depNode.appendNode('version', version)
+					depNode.appendNode('scope', 'compile')
+				}
+
+				def deps = depsProvider.get()
+
+				addDep('tamaized', 'beanification', deps.beanification_version)
+				addDep('tamaized', 'pkginfoutil', deps.pkginfoutil_version)
+			}
         }
     }
     repositories {
