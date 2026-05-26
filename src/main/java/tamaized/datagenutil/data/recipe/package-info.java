@@ -1,8 +1,10 @@
+@FieldsAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 @TypeUseAreNonnullByDefault
 package tamaized.datagenutil.data.recipe;
 
+import com.mojang.logging.annotations.FieldsAreNonnullByDefault;
 import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 import tamaized.pkginfoutil.TypeUseAreNonnullByDefault;
 
