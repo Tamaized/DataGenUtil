@@ -6,6 +6,7 @@ import net.minecraft.tags.TagKey;
 import tamaized.beanification.Component;
 import tamaized.pkginfoutil.PublicApi;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 @PublicApi
@@ -14,9 +15,9 @@ public class TagProviderUtil {
 
 	@PublicApi
 	@SafeVarargs
-	public final <T> void tagMany(Function<TagKey<T>, TagAppender<ResourceKey<T>, T>> provider, ResourceKey<T> type, TagKey<T>... tags) {
+	public final <T> void tagMany(Function<TagKey<T>, TagAppender<ResourceKey<T>, T>> provider, Consumer<TagAppender<ResourceKey<T>, T>> appenderConsumer, TagKey<T>... tags) {
 		for (TagKey<T> key : tags) {
-			provider.apply(key).add(type);
+			appenderConsumer.accept(provider.apply(key));
 		}
 	}
 
