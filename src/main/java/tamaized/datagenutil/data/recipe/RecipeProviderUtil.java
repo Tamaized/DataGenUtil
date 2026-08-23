@@ -5,6 +5,7 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import tamaized.beanification.Component;
@@ -20,6 +21,11 @@ public class RecipeProviderUtil {
 	@PublicApi
 	public Criterion<InventoryChangeTrigger.TriggerInstance> has(HolderGetter<Item> registry, ItemLike itemLike) {
 		return inventoryTrigger(ItemPredicate.Builder.item().of(registry, itemLike));
+	}
+
+	@PublicApi
+	public Criterion<InventoryChangeTrigger.TriggerInstance> has(HolderGetter<Item> registry, TagKey<Item> itemTagKey) {
+		return inventoryTrigger(ItemPredicate.Builder.item().of(registry, itemTagKey));
 	}
 
 	@PublicApi
