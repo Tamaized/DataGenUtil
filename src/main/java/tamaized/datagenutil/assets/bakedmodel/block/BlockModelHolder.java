@@ -1,7 +1,7 @@
 package tamaized.datagenutil.assets.bakedmodel.block;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -81,7 +81,7 @@ public abstract class BlockModelHolder extends ModelHolder<BlockModelGenerators>
 		return false;
 	}
 
-	public MultiVariantGenerator buildBlockState(BlockModelGenerators provider) {
+	public BlockModelDefinitionGenerator buildBlockState(BlockModelGenerators provider) {
 		return BlockModelGenerators.createSimpleBlock(Objects.requireNonNull(blockForName()).get(), BlockModelGenerators.plainVariant(getOrBuild(provider)));
 	}
 
