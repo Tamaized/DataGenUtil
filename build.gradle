@@ -126,7 +126,7 @@ repositories {
 dependencies {
 //    runtimeOnly "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
 
-	def beanification = "tamaized:beanification:${project.beanification_version}"
+	def beanification = "tamaized:beanification-fml-connector:${project.beanification_fml_version}"
 	implementation beanification
 	testImplementation "${beanification}:tests"
 	testCompileOnly "${beanification}:test-sources"
@@ -193,7 +193,7 @@ publishing {
 
 			def depsProvider = this.project.provider {
 				[
-					beanification_version: this.project.beanification_version,
+					beanification_fml_version: this.project.beanification_fml_version,
 					pkginfoutil_version: this.project.pkginfoutil_version
 				]
 			}
@@ -211,7 +211,7 @@ publishing {
 
 				def deps = depsProvider.get()
 
-				addDep('tamaized', 'beanification', deps.beanification_version)
+				addDep('tamaized', 'beanification-fml-connector', deps.beanification_fml_version)
 				addDep('tamaized', 'pkginfoutil', deps.pkginfoutil_version)
 			}
         }
